@@ -203,21 +203,22 @@ footer{
 }
 </style>
 </head>
-
-<audio id="bgMusic" loop playsinline>
-  <source src="assets/audio/background.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
   
 <body>
 
+  <audio id="bgMusic" loop playsinline>
+  <source src="assets/audio/background.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
 <header>
-  <button class="btn secondary" id="musicBtn" onclick="toggleMusic()">
-  ▶ Play music
-</button>
   <div class="container nav">
     <div class="brand">letsveereal</div>
-    <button class="btn" onclick="textToBook()">Text to book</button>
+
+    <div style="display:flex; gap:10px; align-items:center;">
+      <button class="btn secondary" id="musicBtn" onclick="toggleMusic()">▶ Play music</button>
+      <button class="btn" onclick="textToBook()">Text to book</button>
+    </div>
   </div>
 </header>
 
@@ -328,6 +329,26 @@ function textToBook(){
 }
 function scrollToProof(){
   document.getElementById("proof").scrollIntoView({behavior:"smooth"});
+}
+<script>
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+let isPlaying = false;
+
+function toggleMusic(){
+  if(!isPlaying){
+    music.volume = 0.3;
+    music.play().then(() => {
+      isPlaying = true;
+      musicBtn.textContent = "⏸ Pause music";
+    }).catch(() => {
+      alert("Tap again to play music (browser blocked autoplay).");
+    });
+  } else {
+    music.pause();
+    isPlaying = false;
+    musicBtn.textContent = "▶ Play music";
+  }
 }
 </script>
 
