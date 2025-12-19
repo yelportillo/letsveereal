@@ -324,16 +324,17 @@ footer{
 <div class="textus" onclick="textToBook()">Text me</div>
 
 <script>
-function textToBook(){
-  window.location.href = "sms:3022601994";
-}
-function scrollToProof(){
-  document.getElementById("proof").scrollIntoView({behavior:"smooth"});
-}
-<script>
 const music = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
 let isPlaying = false;
+
+function textToBook(){
+  window.location.href = "sms:3022601994";
+}
+
+function scrollToProof(){
+  document.getElementById("proof").scrollIntoView({behavior:"smooth"});
+}
 
 function toggleMusic(){
   if(!isPlaying){
