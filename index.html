@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>letsveereal — Natural moments, captured honestly.</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --bg:#070707;
   --text:#f4f4f4;
-  --muted:rgba(255,255,255,.72);
+  --muted:rgba(255,255,255,.7);
   --border:rgba(255,255,255,.14);
   --radius:18px;
   --shadow:0 20px 60px rgba(0,0,0,.55);
@@ -44,7 +44,7 @@ header{
   background:#fff;
   color:#111;
   padding:10px 18px;
-  font-weight:700;
+  font-weight:600;
   cursor:pointer;
 }
 .btn.secondary{
@@ -64,7 +64,12 @@ header{
   position:absolute;
   inset:0;
   background:
-    linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.2), rgba(0,0,0,.75)),
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.2),
+      rgba(0,0,0,.75)
+    ),
     url("assets/img/hero.jpg") top center / cover no-repeat;
 }
 .hero-content{
@@ -78,6 +83,17 @@ header{
   margin:0;
 }
 .hero p{color:var(--muted);max-width:560px}
+.hero-actions{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.pill{
+  margin-top:16px;
+  display:inline-flex;
+  gap:12px;
+  padding:10px 14px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  color:var(--muted);
+  font-weight:500;
+}
 
 /* SECTIONS */
 section{padding:80px 0}
@@ -88,106 +104,83 @@ section{padding:80px 0}
   margin-bottom:22px;
 }
 
-/* ABOUT — FIT IMAGE (NO CROP), NO BLUR */
+/* ABOUT (UPDATED) */
 .about-wrap{
   position:relative;
   padding:100px 0;
-  background-color:#050505;
-
-  /* ✅ keeps the image fully visible (no crop) */
-  background-image:
-    linear-gradient(rgba(0,0,0,.78), rgba(0,0,0,.88)),
-    url("assets/img/about-bg.jpg");
-  background-repeat:no-repeat;
-  background-position:center center;
-  background-size:contain;
-
-  /* gives it breathing room so "contain" doesn’t feel cramped */
-  min-height:520px;
+  background:
+    linear-gradient(
+      rgba(0,0,0,.75),
+      rgba(0,0,0,.85)
+    ),
+    url("assets/img/about-bg.jpg") center / cover no-repeat;
 }
-
-/* optional: subtle “frame” so empty edges still look intentional */
 .about-wrap::after{
   content:"";
   position:absolute;
   inset:0;
-  border-top:1px solid rgba(255,255,255,.06);
-  border-bottom:1px solid rgba(255,255,255,.06);
+  background:radial-gradient(
+    circle at center,
+    rgba(255,255,255,.05),
+    transparent 70%
+  );
   pointer-events:none;
 }
-
 .about-card{
   position:relative;
   z-index:2;
-  max-width:860px;
+  max-width:820px;
   margin:0 auto;
-  padding:34px 30px;
+  padding:30px;
   border:1px solid var(--border);
   border-radius:var(--radius);
-  background:rgba(0,0,0,.60);
-  box-shadow:var(--shadow);
+  background:rgba(255,255,255,.03);
+  backdrop-filter: blur(6px);
 }
-
-/* Typography emphasis */
 .about-card p{
   color:var(--muted);
   text-align:center;
   margin:0;
-  line-height:1.75;
-  font-size:16px;
-  letter-spacing:.15px;
+  line-height:1.65;
 }
 .about-card p + p{margin-top:14px}
-
+.about-card strong{
+  font-weight:600;
+  color:#ffffff;
+}
+.about-card em{
+  font-family:"Playfair Display", serif;
+  font-style:normal;
+  font-weight:600;
+  letter-spacing:.4px;
+  color:#fff;
+}
+.highlight{
+  font-family:"Playfair Display", serif;
+  font-size:18px;
+  letter-spacing:.6px;
+  color:#fff;
+}
 .brand-accent{
   text-transform:uppercase;
-  letter-spacing:2.6px;
+  letter-spacing:2px;
   font-size:12px;
-  opacity:.82;
-  margin-bottom:12px !important;
-  color:rgba(255,255,255,.78);
+  opacity:.8;
+  margin-bottom:10px !important;
 }
 
-.about-lead{
-  font-family:"Playfair Display",serif;
-  font-size:20px;
-  line-height:1.55;
-  color:rgba(255,255,255,.92);
-}
-
-.emph{
-  font-family:"Playfair Display",serif;
-  font-weight:700;
-  color:#fff;
-}
-
-.tag{
-  display:inline-block;
-  padding:4px 10px;
-  border:1px solid rgba(255,255,255,.18);
-  border-radius:999px;
-  color:#fff;
-  font-weight:700;
-  letter-spacing:.6px;
-  font-size:12px;
-  text-transform:uppercase;
-}
-
-.soft{
-  font-weight:700;
-  color:rgba(255,255,255,.92);
-}
-
-.signature{
-  margin-top:22px !important;
-  font-family:"Playfair Display",serif;
-  font-size:18px;
-  color:#fff;
-  letter-spacing:.4px;
-}
-
-/* GALLERY */
+/* LANDSCAPE SCROLL GALLERY */
 .gallery-wrap{position:relative}
+.gallery-wrap::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:90px;
+  height:100%;
+  pointer-events:none;
+  background:linear-gradient(to right, transparent, var(--bg));
+}
 .gallery{
   display:flex;
   gap:16px;
@@ -195,7 +188,13 @@ section{padding:80px 0}
   padding-bottom:10px;
   scroll-snap-type:x mandatory;
 }
+.gallery::-webkit-scrollbar{height:8px}
+.gallery::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,.35);
+  border-radius:10px;
+}
 .gallery img{
+  flex:0 0 auto;
   width:520px;
   height:320px;
   object-fit:cover;
@@ -204,14 +203,31 @@ section{padding:80px 0}
   scroll-snap-align:start;
 }
 
+/* TESTIMONIAL */
+blockquote{
+  margin:40px auto 0;
+  max-width:800px;
+  text-align:center;
+  color:var(--muted);
+}
+blockquote span{
+  display:block;
+  margin-top:10px;
+  font-size:13px;
+  opacity:.8;
+}
+
 /* FOOTER */
 footer{
   padding:40px 0 80px;
   border-top:1px solid var(--border);
 }
-.footer{display:flex;justify-content:space-between}
+.footer{
+  display:flex;
+  justify-content:space-between;
+}
 
-/* FLOATING BUTTON */
+/* FLOATING TEXT BUTTON */
 .textus{
   position:fixed;
   bottom:18px;
@@ -220,21 +236,20 @@ footer{
   color:#111;
   border-radius:14px;
   padding:12px 16px;
-  font-weight:800;
+  font-weight:700;
   box-shadow:var(--shadow);
   cursor:pointer;
 }
 
 /* MOBILE */
 @media (max-width:700px){
-  .about-wrap{
-    padding:84px 0;
-    /* keep "contain" so it never crops */
-    background-size:contain;
-    min-height:520px;
+  .gallery img{
+    width:82vw;
+    height:52vw;
+    max-height:340px;
   }
-  .about-card{padding:28px 18px}
-  .about-lead{font-size:18px}
+  .about-wrap{padding:86px 0}
+  .about-card{padding:22px}
 }
 </style>
 </head>
@@ -243,27 +258,43 @@ footer{
 
 <audio id="bgMusic" loop playsinline>
   <source src="assets/audio/background.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
 </audio>
 
 <header>
   <div class="container nav">
     <div class="brand">letsveereal</div>
-    <div style="display:flex; gap:10px;">
+
+    <div style="display:flex; gap:10px; align-items:center;">
       <button class="btn secondary" id="musicBtn" onclick="toggleMusic()">▶ Play music</button>
       <button class="btn" onclick="textToBook()">Text to book</button>
     </div>
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <div class="container hero-content">
     <h1>Let’s be real.</h1>
     <p><strong>Natural moments, captured honestly.</strong></p>
-    <p><strong>$50 · 30-minute session</strong><br>10–20 edited photos</p>
+
+    <p style="margin-top:10px">
+      <strong>$50 · 30-minute session</strong><br>
+      Includes 10–20 edited photos · Same-day prints available
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn" onclick="textToBook()">Text to book</button>
+      <button class="btn secondary" onclick="scrollToProof()">View work</button>
+    </div>
+
+    <div class="pill">
+      Available Monday - Friday 9:00 AM – 5:00 PM • Dover, DE
+    </div>
   </div>
 </section>
 
-<!-- ✅ UPDATED ABOUT SECTION -->
+<!-- ABOUT (UPDATED) -->
 <section class="about-wrap">
   <div class="container">
     <h2 class="section-title">About letsveereal</h2>
@@ -271,29 +302,68 @@ footer{
     <div class="about-card">
       <p class="brand-accent">Behind the lens</p>
 
-      <p class="about-lead">
-        Hello, I’m <span class="emph">Viriel (“Yel”)</span> — the photographer behind
-        <span class="emph">letsveereal</span>.
+      <p>
+        Hello, I’m <strong>Viriel (“Yel”)</strong> — the photographer behind
+        <span class="highlight">letsveereal photography</span>.
       </p>
 
       <p>
-        Inspired by my name, <span class="tag">lets veereal</span> is about
-        <span class="soft">honest moments</span>, <span class="soft">natural light</span>,
-        and photos that feel <span class="emph">real</span>.
+        The name <em>letsveereal</em> is inspired by my own name, Viriel, and reflects
+        my approach to photography — capturing
+        <strong>honest moments</strong>,
+        <strong>natural light</strong>, and images that feel
+        <em>genuine</em>.
       </p>
 
       <p>
-        Shot on an <span class="emph">Olympus OM-D E-M10 Mark IV</span> and edited in
-        <span class="emph">Adobe Lightroom</span> for a clean, timeless look.
+        I shoot with an <strong>Olympus OM-D E-M10 Mark IV</strong>, and every image is
+        carefully refined in <strong>Adobe Lightroom</strong> for
+        <em>clean, timeless color</em> and consistency.
+        <strong>Same-day instant prints</strong> are available, so you leave with
+        something real in your hands.
       </p>
 
       <p>
-        <span class="soft">Mini sessions</span>, <span class="soft">custom shoots</span>,
-        and <span class="soft">same-day prints</span> available.
+        I offer <strong>mini sessions</strong> and <strong>custom shoots</strong> with
+        flexible locations. Clients who can assist with
+        <em>transportation</em> receive a
+        <strong>20% discount</strong> — keeping photography accessible without
+        compromising quality.
       </p>
 
-      <p class="signature"><strong>let’s veereal.</strong></p>
+      <p style="margin-top:22px; font-weight:600;">
+        If you’re looking for photography that feels
+        <em>natural</em>, <em>personal</em>, and <em>true</em> —
+        <br><strong>let’s veereal.</strong>
+      </p>
     </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="proof">
+  <div class="container">
+    <h2 class="section-title">Latest Gallery</h2>
+
+    <div class="gallery-wrap">
+      <div class="gallery">
+        <img src="assets/img/proof-01.jpg" alt="Gallery photo 1">
+        <img src="assets/img/proof-02.jpg" alt="Gallery photo 2">
+        <img src="assets/img/proof-03.jpg" alt="Gallery photo 3">
+        <img src="assets/img/proof-04.jpg" alt="Gallery photo 4">
+        <img src="assets/img/proof-05.jpg" alt="Gallery photo 5">
+        <img src="assets/img/proof-06.jpg" alt="Gallery photo 6">
+        <img src="assets/img/proof-07.jpg" alt="Gallery photo 7">
+        <img src="assets/img/proof-08.jpg" alt="Gallery photo 8">
+        <img src="assets/img/proof-09.jpg" alt="Gallery photo 9">
+        <img src="assets/img/proof-10.jpg" alt="Gallery photo 10">
+      </div>
+    </div>
+
+    <blockquote>
+      “my bro REALLY did his thing for our Anniversary pics! These turned out so beautifully!!!”
+      <span>— Andrea Brown, Virginia</span>
+    </blockquote>
   </div>
 </section>
 
@@ -314,12 +384,19 @@ function textToBook(){
   window.location.href = "sms:3022601994";
 }
 
+function scrollToProof(){
+  document.getElementById("proof").scrollIntoView({behavior:"smooth"});
+}
+
 function toggleMusic(){
   if(!isPlaying){
     music.volume = 0.3;
-    music.play();
-    isPlaying = true;
-    musicBtn.textContent = "⏸ Pause music";
+    music.play().then(() => {
+      isPlaying = true;
+      musicBtn.textContent = "⏸ Pause music";
+    }).catch(() => {
+      alert("Tap again to play music (browser blocked autoplay).");
+    });
   } else {
     music.pause();
     isPlaying = false;
