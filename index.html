@@ -117,14 +117,26 @@ section{padding:80px 0}
 
 /* ABOUT */
 .about-wrap{padding:80px 0}
+
+/* Card now supports a FIT (no crop) background image */
 .about-card{
-  max-width:900px;
+  max-width:980px;
   margin:0 auto;
-  padding:34px 26px;
   border:1px solid var(--border);
   border-radius:var(--radius);
+  overflow:hidden;
   background:rgba(255,255,255,.03);
 }
+
+/* Background image layer (fit, no crop, no blur) */
+.about-bg{
+  padding:34px 26px;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.70), rgba(0,0,0,.45), rgba(0,0,0,.75)),
+    url("assets/img/bg-image.jpg") center/contain no-repeat;
+  background-color:#000; /* fills any empty space from contain */
+}
+
 .about-lede{
   text-align:center;
   margin:0 0 18px;
@@ -133,10 +145,11 @@ section{padding:80px 0}
   letter-spacing:.14em;
   text-transform:uppercase;
 }
+
 .about-copy{
   margin:0 auto;
   max-width:78ch;
-  color:rgba(255,255,255,.78);
+  color:rgba(255,255,255,.80);
   font-size:15.5px;
   line-height:1.85;
   text-align:center;
@@ -144,7 +157,7 @@ section{padding:80px 0}
 .about-copy p{margin:0}
 .about-copy p + p{margin-top:16px}
 
-/* Emphasis styling */
+/* Emphasis styling (no bubbles) */
 .about-copy em{
   font-family:"Playfair Display",serif;
   font-style:italic;
@@ -154,15 +167,6 @@ section{padding:80px 0}
 .about-copy strong{
   color:var(--accent);
   font-weight:700;
-}
-.about-copy .highlight{
-  padding:.05em .4em;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.16);
-  background:rgba(255,255,255,.06);
-  color:rgba(255,255,255,.92);
-  font-weight:700;
-  white-space:nowrap;
 }
 .about-signoff{
   margin-top:18px;
@@ -245,7 +249,7 @@ footer{
     height:52vw;
     max-height:340px;
   }
-  .about-card{padding:28px 18px}
+  .about-bg{padding:28px 18px}
   .about-copy{font-size:15px}
 }
 </style>
@@ -301,37 +305,38 @@ footer{
     <h2 class="section-title">Behind The Lens</h2>
 
     <div class="about-card">
-      <div class="about-lede">letsveereal photography</div>
+      <div class="about-bg">
+        <div class="about-lede">letsveereal photography</div>
 
-      <div class="about-copy">
-        <p>
-          Hello, I’m <strong>Viriel (“Yel”)</strong>, the photographer behind <strong>letsveereal</strong>.
-        </p>
+        <div class="about-copy">
+          <p>
+            Hello, I’m <strong>Viriel (“Yel”)</strong>, the photographer behind <strong>letsveereal</strong>.
+          </p>
 
-        <p>
-          The name <em>letsveereal</em> is inspired by my own name, Viriel, and reflects my approach to photography—
-          capturing <span class="highlight">honest moments</span>, <span class="highlight">natural light</span>, and images that feel
-          <span class="highlight">genuine</span>. My work focuses on <strong>authentic expressions</strong> and
-          <em>clean, timeless visuals</em> that tell your story in a meaningful way.
-        </p>
+          <p>
+            The name <em>letsveereal</em> is inspired by my own name, Viriel, and reflects my approach to photography—capturing
+            <strong>honest moments</strong>, <strong>natural light</strong>, and images that feel <strong>genuine</strong>.
+            My work focuses on <strong>authentic expressions</strong> and <em>clean, timeless visuals</em> that tell your story in a meaningful way.
+          </p>
 
-        <p>
-          I shoot with an <strong>Olympus OM-D E-M10 Mark IV</strong> paired with carefully selected lenses, and every image is
-          professionally edited using <strong>Adobe Lightroom</strong> to ensure consistent <strong>color</strong>, <strong>clarity</strong>,
-          and <strong>quality</strong>. I also offer <span class="highlight">same-day instant photo prints</span>, so you can leave your
-          session with a physical memory the very same day.
-        </p>
+          <p>
+            I shoot with an <strong>Olympus OM-D E-M10 Mark IV</strong> paired with carefully selected lenses, and every image is
+            professionally edited using <strong>Adobe Lightroom</strong> to ensure consistent <strong>color</strong>, <strong>clarity</strong>,
+            and <strong>quality</strong>. I also offer <strong>same-day instant photo prints</strong>, allowing clients to leave their session
+            with a physical memory the very same day.
+          </p>
 
-        <p>
-          I provide <strong>mini sessions</strong> and <strong>custom shoots</strong> with flexible locations tailored to your needs.
-          For clients who can assist with <span class="highlight">transportation</span> to their preferred location,
-          a <strong>20% discount</strong> is available—helping keep professional photography accessible while maintaining high-quality results.
-        </p>
+          <p>
+            I provide <strong>mini sessions</strong> and <strong>custom shoots</strong> with flexible locations tailored to your needs.
+            For clients who can assist with <strong>transportation</strong> to their preferred location, a <strong>20% discount</strong> is available—helping keep
+            professional photography accessible while maintaining high-quality results.
+          </p>
 
-        <p class="about-signoff">
-          If you’re looking for photography that feels natural, personal, and true to you—<br>
-          <strong>let’s veereal.</strong>
-        </p>
+          <p class="about-signoff">
+            If you’re looking for photography that feels natural, personal, and true to you—<br>
+            <strong>let’s veereal.</strong>
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -383,7 +388,6 @@ function textToBook(){
 function scrollToProof(){
   document.getElementById("proof").scrollIntoView({behavior:"smooth"});
 }
-
 function toggleMusic(){
   if(!isPlaying){
     music.volume = 0.3;
