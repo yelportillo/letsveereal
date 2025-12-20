@@ -17,8 +17,8 @@
   --shadow:0 20px 60px rgba(0,0,0,.55);
 }
 *{box-sizing:border-box}
-html,body{margin:0}
 body{
+  margin:0;
   background:var(--bg);
   color:var(--text);
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
@@ -30,9 +30,7 @@ header{
   position:sticky;
   top:0;
   z-index:50;
-  backdrop-filter:blur(10px);
-  background:rgba(0,0,0,.55);
-  border-bottom:1px solid rgba(255,255,255,.12);
+  background:transparent;     /* fully transparent */
 }
 .nav{
   display:flex;
@@ -67,7 +65,7 @@ header{
   color:#fff;
 }
 #musicBtn{
-  width:150px;       /* prevents shifting */
+  width:150px;     /* prevents shifting */
   text-align:center;
 }
 
@@ -153,7 +151,6 @@ section{padding:80px 0}
 }
 
 /* GALLERY */
-.gallery-wrap{position:relative}
 .gallery{
   display:flex;
   gap:16px;
@@ -228,7 +225,7 @@ footer{
     </div>
 
     <div class="hero-actions">
-      <button class="btn" onclick="textToBook()">Text 302-260-1994</button>
+      <button class="btn" onclick="textToBook()">Text to book</button>
       <button class="btn secondary" onclick="scrollToProof()">View work</button>
     </div>
 
@@ -267,19 +264,17 @@ footer{
 <section id="proof">
   <div class="container">
     <h2 class="section-title">Latest Gallery</h2>
-    <div class="gallery-wrap">
-      <div class="gallery">
-        <img src="assets/img/proof-01.jpg">
-        <img src="assets/img/proof-02.jpg">
-        <img src="assets/img/proof-03.jpg">
-        <img src="assets/img/proof-04.jpg">
-        <img src="assets/img/proof-05.jpg">
-        <img src="assets/img/proof-06.jpg">
-        <img src="assets/img/proof-07.jpg">
-        <img src="assets/img/proof-08.jpg">
-        <img src="assets/img/proof-09.jpg">
-        <img src="assets/img/proof-10.jpg">
-      </div>
+    <div class="gallery">
+      <img src="assets/img/proof-01.jpg">
+      <img src="assets/img/proof-02.jpg">
+      <img src="assets/img/proof-03.jpg">
+      <img src="assets/img/proof-04.jpg">
+      <img src="assets/img/proof-05.jpg">
+      <img src="assets/img/proof-06.jpg">
+      <img src="assets/img/proof-07.jpg">
+      <img src="assets/img/proof-08.jpg">
+      <img src="assets/img/proof-09.jpg">
+      <img src="assets/img/proof-10.jpg">
     </div>
   </div>
 </section>
@@ -288,7 +283,7 @@ footer{
   <div class="brand">letsveereal</div>
 </footer>
 
-<div class="textus" onclick="textToBook()">Text me</div>
+<div class="textus" onclick="textToBook()">Text to book</div>
 
 <script>
 const music = document.getElementById("bgMusic");
