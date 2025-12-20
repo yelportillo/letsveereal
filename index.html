@@ -30,19 +30,29 @@ header{
   position:sticky;
   top:0;
   z-index:50;
-  background:transparent;     /* fully transparent */
+
+  /* transparent, but polished */
+  background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,0));
+  border-bottom:1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
+
 .nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:18px 0;
+  gap:12px;
+  padding:16px 0;
 }
+
 .brand{
   font-family:"Playfair Display",serif;
   font-size:20px;
   text-transform:lowercase;
+  letter-spacing:.5px;
 }
+
 .nav-actions{
   display:flex;
   gap:10px;
@@ -50,20 +60,30 @@ header{
   flex-wrap:nowrap;
 }
 
-/* BUTTONS */
 .btn{
   border-radius:999px;
-  border:1px solid var(--border);
-  background:#fff;
-  color:#111;
-  padding:10px 18px;
+  border:1px solid rgba(255,255,255,.18);
+  padding:10px 16px;
   font-weight:700;
   cursor:pointer;
+  transition:transform .12s ease, background .12s ease, border-color .12s ease, opacity .12s ease;
 }
+
+.btn:active{ transform: translateY(1px); }
+
+.btn{
+  background:#fff;
+  color:#111;
+}
+
 .btn.secondary{
-  background:transparent;
+  background:rgba(255,255,255,.08);
   color:#fff;
+  border-color:rgba(255,255,255,.20);
 }
+
+.btn.secondary:hover{ background:rgba(255,255,255,.12); }
+
 #musicBtn{
   width:150px;     /* prevents shifting */
   text-align:center;
