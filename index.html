@@ -5,153 +5,242 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>letsveereal — Natural moments, captured honestly.</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --bg:#070707;
   --text:#f4f4f4;
   --muted:rgba(255,255,255,.72);
-  --border:rgba(255,255,255,.14);
+  --border2:rgba(255,255,255,.10);
   --radius:18px;
-  --shadow:0 20px 60px rgba(0,0,0,.55);
+  --shadow:0 18px 60px rgba(0,0,0,.55);
+  --shadow2:0 10px 28px rgba(0,0,0,.45);
 }
+
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   margin:0;
-  background:var(--bg);
+  background:radial-gradient(1200px 800px at 20% -10%, rgba(255,255,255,.06), transparent 55%),
+             radial-gradient(900px 700px at 80% 0%, rgba(255,255,255,.04), transparent 55%),
+             var(--bg);
   color:var(--text);
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  line-height:1.6;
 }
-.container{max-width:1200px;margin:0 auto;padding:0 22px}
+a{color:inherit}
+.container{max-width:1120px;margin:0 auto;padding:0 22px}
+::selection{background:rgba(255,255,255,.18)}
+:focus-visible{outline:2px solid rgba(255,255,255,.55); outline-offset:3px; border-radius:10px}
 
 /* HEADER */
 header{
   position:sticky;
   top:0;
   z-index:50;
-
-  background:rgba(0,0,0,.55);   /* clean, readable */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom:1px solid rgba(255,255,255,.12);
+  background:rgba(0,0,0,.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.10);
 }
-
 .nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:12px;
-  padding:16px 0;
+  gap:14px;
+  padding:14px 0;
 }
-
 .brand{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  text-decoration:none;
+}
+.brand .logo{
   font-family:"Playfair Display",serif;
   font-size:20px;
   text-transform:lowercase;
-  letter-spacing:.5px;
+  letter-spacing:.6px;
 }
-
+.brand .tag{
+  font-size:13px;
+  color:var(--muted);
+  border-left:1px solid rgba(255,255,255,.14);
+  padding-left:10px;
+  display:none;
+}
 .nav-actions{
   display:flex;
   gap:10px;
   align-items:center;
-  flex-wrap:nowrap;
+  flex-wrap:wrap;
 }
 
+/* BUTTONS (less “bubbly”) */
 .btn{
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.18);
-  padding:10px 16px;
-  font-weight:700;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.16);
+  padding:10px 14px;
+  font-weight:800;
   cursor:pointer;
-  transition:transform .12s ease, background .12s ease, border-color .12s ease, opacity .12s ease;
+  transition:transform .12s ease, background .12s ease, border-color .12s ease, opacity .12s ease, box-shadow .12s ease;
+  user-select:none;
+  letter-spacing:.2px;
 }
-
 .btn:active{ transform: translateY(1px); }
 
-.btn{
+.btn.primary{
   background:#fff;
   color:#111;
+  box-shadow:0 10px 26px rgba(255,255,255,.10);
 }
+.btn.primary:hover{ opacity:.95; }
 
-.btn.secondary{
-  background:rgba(255,255,255,.08);
+.btn.ghost{
+  background:rgba(255,255,255,.06);
   color:#fff;
-  border-color:rgba(255,255,255,.20);
+  border-color:rgba(255,255,255,.16);
 }
+.btn.ghost:hover{ background:rgba(255,255,255,.10); }
 
-.btn.secondary:hover{ background:rgba(255,255,255,.12); }
-
-#musicBtn{
-  width:150px;     /* prevents shifting */
-  text-align:center;
+.btn.small{
+  padding:9px 12px;
+  font-size:14px;
+  font-weight:800;
 }
 
 /* HERO */
 .hero{
-  height:100vh;
+  min-height:92vh;
   position:relative;
   overflow:hidden;
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 .hero::before{
   content:"";
   position:absolute;
-  inset:0;
+  inset:-20px;
   background:
-    linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.25),rgba(0,0,0,.8)),
-    url("assets/img/hero.jpg") center / cover no-repeat;
+    radial-gradient(700px 500px at 25% 25%, rgba(255,255,255,.10), transparent 60%),
+    linear-gradient(180deg,rgba(0,0,0,.72),rgba(0,0,0,.25),rgba(0,0,0,.86)),
+    url("assets/img/hero.jpg") top center / cover no-repeat;
+  filter:saturate(1.05) contrast(1.05);
+  transform:scale(1.02);
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.18) 55%, rgba(0,0,0,.55) 100%);
+  pointer-events:none;
 }
 .hero-content{
   position:relative;
   z-index:2;
-  padding-top:80px;
+  padding:82px 0 40px;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:22px;
+  align-items:end;
 }
 .hero h1{
   font-family:"Playfair Display",serif;
   font-size:clamp(44px,6vw,72px);
   margin:0;
+  letter-spacing:.2px;
 }
-.hero p{color:var(--muted);max-width:600px}
-.hero-actions{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
-.hero-price{
-  margin-top:14px;
-  padding:14px 16px;
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  background:rgba(255,255,255,.04);
-  max-width:520px;
+.hero p{color:var(--muted);max-width:60ch;margin:10px 0 0}
+.hero-actions{
+  margin-top:18px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:center;
 }
-.pill{
+.hero-meta{
   margin-top:16px;
-  padding:10px 14px;
-  border:1px solid var(--border);
-  border-radius:999px;
   color:var(--muted);
-  display:inline-block;
+  font-size:14px;
+}
+
+/* INFO CARD */
+.info-card{
+  border:1px solid var(--border2);
+  border-radius:16px;
+  background:rgba(10,10,10,.55);
+  box-shadow:var(--shadow2);
+  padding:16px;
+}
+.price{
+  font-weight:900;
+  letter-spacing:.2px;
+  font-size:16px;
+}
+.price-sub{
+  margin-top:6px;
+  color:var(--muted);
+  font-size:14px;
+}
+.quick-list{
+  margin:12px 0 0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:8px;
+  color:rgba(255,255,255,.80);
+  font-size:14px;
+}
+.quick-list li{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+}
+.dot{
+  width:8px;height:8px;border-radius:2px;
+  background:rgba(255,255,255,.55);
+  margin-top:6px;
+  flex:0 0 auto;
 }
 
 /* SECTIONS */
-section{padding:80px 0}
+section{padding:78px 0}
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:20px;
+}
 .section-title{
-  text-align:center;
   font-family:"Playfair Display",serif;
   font-size:30px;
-  margin-bottom:22px;
+  margin:0;
+}
+.section-sub{
+  color:var(--muted);
+  max-width:72ch;
+  margin:10px 0 0;
+}
+.section-actions{
+  display:flex; gap:10px; flex-wrap:wrap;
 }
 
 /* ABOUT */
-.about-card{
+.about-wrap{
   max-width:980px;
   margin:0 auto;
-  border:1px solid var(--border);
+  border:1px solid var(--border2);
   border-radius:var(--radius);
   overflow:hidden;
+  box-shadow:var(--shadow2);
 }
 .about-bg{
-  padding:36px 28px;
+  padding:40px 28px;
   background:
-    linear-gradient(180deg,rgba(0,0,0,.75),rgba(0,0,0,.4),rgba(0,0,0,.8)),
+    linear-gradient(180deg,rgba(0,0,0,.78),rgba(0,0,0,.42),rgba(0,0,0,.86)),
     url("assets/img/bg-image.jpg") center / cover no-repeat;
 }
 .about-copy{
@@ -159,7 +248,7 @@ section{padding:80px 0}
   margin:0 auto;
   text-align:center;
   line-height:1.85;
-  color:rgba(255,255,255,.82);
+  color:rgba(255,255,255,.84);
 }
 .about-copy p + p{margin-top:16px}
 .about-copy strong{color:#fff}
@@ -169,174 +258,483 @@ section{padding:80px 0}
   color:#fff;
 }
 
+/* SERVICES */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:14px;
+  margin-top:18px;
+}
+.service{
+  padding:18px;
+  border:1px solid var(--border2);
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+}
+.service h3{margin:0 0 6px;font-size:16px;letter-spacing:.2px}
+.service p{margin:0;color:var(--muted);font-size:14px;line-height:1.65}
+
 /* GALLERY */
 .gallery{
   display:flex;
-  gap:16px;
+  gap:14px;
   overflow-x:auto;
-  padding-bottom:10px;
+  padding:4px 2px 10px;
   scroll-snap-type:x mandatory;
+}
+.gallery::-webkit-scrollbar{height:10px}
+.gallery::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:999px}
+.gallery::-webkit-scrollbar-track{background:rgba(255,255,255,.06);border-radius:999px}
+
+.gallery figure{
+  margin:0;
+  position:relative;
+  scroll-snap-align:start;
+  flex:0 0 auto;
 }
 .gallery img{
   width:520px;
   height:320px;
   object-fit:cover;
-  border-radius:var(--radius);
-  border:1px solid var(--border);
-  scroll-snap-align:start;
+  border-radius:16px;
+  border:1px solid var(--border2);
+  box-shadow:var(--shadow2);
+  transition:transform .15s ease, opacity .15s ease;
+  cursor:zoom-in;
 }
+.gallery img:hover{transform:translateY(-2px); opacity:.98}
+
+/* CONTACT */
+.contact{
+  max-width:980px;
+  margin:0 auto;
+  border:1px solid var(--border2);
+  border-radius:var(--radius);
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  padding:22px;
+}
+.contact-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:18px;
+  align-items:start;
+}
+.kv{
+  display:grid;
+  gap:10px;
+  margin-top:12px;
+}
+.kv div{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  padding:10px 12px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:14px;
+  background:rgba(0,0,0,.18);
+}
+.kv span{color:var(--muted)}
+.kv strong{font-weight:900}
+.note{color:var(--muted); font-size:14px; margin:10px 0 0}
 
 /* FOOTER */
 footer{
-  padding:40px 0 80px;
-  border-top:1px solid var(--border);
+  padding:34px 0 70px;
+  border-top:1px solid rgba(255,255,255,.10);
   text-align:center;
+  color:rgba(255,255,255,.80);
 }
+footer .brandline{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+footer .brandline .logo{
+  font-family:"Playfair Display",serif;
+  text-transform:lowercase;
+  letter-spacing:.6px;
+  color:#fff;
+}
+footer small{display:block; color:var(--muted); margin-top:10px}
 
-/* FLOATING TEXT */
-.textus{
+/* FLOATING CTA */
+.fab{
   position:fixed;
   bottom:18px;
   right:18px;
+  border-radius:14px;
+  padding:12px 14px;
+  box-shadow:var(--shadow);
   background:#fff;
   color:#111;
-  border-radius:14px;
-  padding:12px 16px;
-  font-weight:800;
-  box-shadow:var(--shadow);
+  border:0;
+  font-weight:900;
   cursor:pointer;
+  transition:transform .12s ease, opacity .12s ease;
+}
+.fab:hover{opacity:.96}
+.fab:active{transform:translateY(1px)}
+
+/* MODAL (gallery lightbox) */
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  place-items:center;
+  background:rgba(0,0,0,.72);
+  z-index:1000;
+  padding:18px;
+}
+.modal.open{display:grid}
+.modal-card{
+  width:min(1100px, 96vw);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:18px;
+  background:rgba(10,10,10,.88);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.modal-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-bottom:1px solid rgba(255,255,255,.10);
+}
+.modal-top .muted{color:var(--muted); font-size:13px}
+.modal-top .x{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  color:#fff;
+  border-radius:12px;
+  padding:8px 10px;
+  cursor:pointer;
+  font-weight:900;
+}
+.modal img{
+  width:100%;
+  height:auto;
+  display:block;
 }
 
 /* MOBILE */
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr; align-items:start}
+  .brand .tag{display:none}
+  .contact-grid{grid-template-columns:1fr}
+}
+@media (min-width:820px){
+  .brand .tag{display:inline}
+}
 @media (max-width:700px){
-  .gallery img{
-    width:82vw;
-    height:52vw;
-  }
+  section{padding:64px 0}
+  .gallery img{width:84vw;height:52vw}
+  .fab{left:18px; right:auto}
 }
 </style>
 </head>
 
 <body>
 
-<audio id="bgMusic" loop playsinline preload="auto">
-  <source src="assets/audio/background.mp3" type="audio/mpeg">
-</audio>
-
 <header>
   <div class="container nav">
-    <div class="brand">letsveereal</div>
+    <a class="brand" href="#top" aria-label="letsveereal home">
+      <span class="logo">letsveereal</span>
+      <span class="tag">Natural moments, captured honestly.</span>
+    </a>
+
     <div class="nav-actions">
-      <button class="btn secondary" id="musicBtn" onclick="toggleMusic()">▶ Play music</button>
-      <button class="btn" onclick="textToBook()">Text to book</button>
+      <button class="btn ghost small" onclick="scrollToId('services')">Services</button>
+      <button class="btn ghost small" onclick="scrollToId('proof')">Gallery</button>
+      <button class="btn ghost small" onclick="scrollToId('contact')">Contact</button>
+      <button class="btn primary" onclick="textToBook()">Text to book</button>
     </div>
   </div>
 </header>
 
-<section class="hero">
-  <div class="container hero-content">
-    <h1>Let’s be real.</h1>
-    <p><strong>Natural moments, captured honestly.</strong></p>
+<main id="top">
+  <section class="hero" aria-label="Hero">
+    <div class="container hero-content">
+      <div class="hero-grid">
+        <div>
+          <h1>Let’s be real.</h1>
+          <p><strong>Natural moments, captured honestly.</strong> Clean edits, natural light, and photos that feel like you.</p>
 
-    <div class="hero-price">
-      <strong>$50 · 30-minute session</strong><br>
-      Includes 10–20 edited photos · Same-day prints available
-    </div>
+          <div class="hero-actions">
+            <button class="btn primary" onclick="textToBook()">Text to book</button>
+            <button class="btn ghost" onclick="scrollToId('proof')">View work</button>
+          </div>
 
-    <div class="hero-actions">
-      <button class="btn" onclick="textToBook()">Text to book</button>
-      <button class="btn secondary" onclick="scrollToProof()">View work</button>
-    </div>
+          <div class="hero-meta">
+            Available Monday–Friday 9:00 AM – 5:00 PM • Dover, DE
+          </div>
+        </div>
 
-    <div class="pill">
-      Available Monday–Friday 9:00 AM – 5:00 PM • Dover, DE
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <h2 class="section-title">Behind The Lens</h2>
-    <div class="about-card">
-      <div class="about-bg">
-        <div class="about-copy">
-  <p>Hello, I’m <strong>Viriel (“Yel”)</strong>, the photographer behind <strong>letsveereal photography</strong>.</p>
-
-  <p>
-    The name <em>letsveereal</em> is inspired by my own name, Viriel, and reflects my approach to photography—capturing
-    <strong>honest moments</strong>, <strong>natural light</strong>, and images that feel <strong>genuine</strong>.
-    My work focuses on <strong>authentic expressions</strong> and <em>clean, timeless visuals</em> that tell your story
-    in a meaningful way.
-  </p>
-
-  <p>
-    I shoot with an <strong>Olympus OM-D E-M10 Mark IV</strong> paired with carefully selected lenses, and every image is
-    professionally edited using <strong>Adobe Lightroom</strong> to ensure consistent <strong>color</strong>,
-    <strong>clarity</strong>, and <strong>quality</strong>. I also offer
-    <strong>same-day instant photo prints</strong>, allowing clients to leave their session with a physical memory
-    the very same day.
-  </p>
-
-  <p>
-    I provide <strong>mini sessions</strong> and <strong>custom shoots</strong> with flexible locations tailored to your needs.
-    For clients who can assist with <strong>transportation</strong> to their preferred location, a
-    <strong>20% discount</strong> is available—helping keep professional photography accessible while maintaining
-    high-quality results.
-  </p>
-
-  <p><strong>let’s veereal.</strong></p>
-</div>
+        <aside class="info-card" aria-label="Session details">
+          <div class="price">$50 · 1-hour session</div>
+          <div class="price-sub">Includes 10–20 edited photos · Same-day prints available</div>
+          <ul class="quick-list">
+            <li><span class="dot"></span><span>Flexible locations tailored to your shoot</span></li>
+            <li><span class="dot"></span><span>Fast turnaround with consistent color + clarity</span></li>
+            <li><span class="dot"></span><span>Ask about the 20% transportation discount</span></li>
+          </ul>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn ghost" onclick="copyNumber()">Copy number</button>
+          </div>
+          <p class="note">Booking is quickest by text. I’ll reply with available times and location options.</p>
+        </aside>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="proof">
-  <div class="container">
-    <h2 class="section-title">Latest Gallery</h2>
-    <div class="gallery">
-      <img src="assets/img/proof-01.jpg">
-      <img src="assets/img/proof-02.jpg">
-      <img src="assets/img/proof-03.jpg">
-      <img src="assets/img/proof-04.jpg">
-      <img src="assets/img/proof-05.jpg">
-      <img src="assets/img/proof-06.jpg">
-      <img src="assets/img/proof-07.jpg">
-      <img src="assets/img/proof-08.jpg">
-      <img src="assets/img/proof-09.jpg">
-      <img src="assets/img/proof-10.jpg">
+  <section aria-label="Behind the lens">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Behind The Lens</h2>
+          <p class="section-sub">A little about the person behind the camera.</p>
+        </div>
+      </div>
+
+      <!-- DO NOT CHANGE DESCRIPTION (content preserved) -->
+      <div class="about-wrap">
+        <div class="about-bg">
+          <div class="about-copy">
+            <p>Hello, I’m <strong>Viriel (“Yel”)</strong>, the photographer behind <strong>letsveereal photography</strong>.</p>
+
+            <p>
+              The name <em>letsveereal</em> is inspired by my own name, Viriel, and reflects my approach to photography—capturing
+              <strong>honest moments</strong>, <strong>natural light</strong>, and images that feel <strong>genuine</strong>.
+              My work focuses on <strong>authentic expressions</strong> and <em>clean, timeless visuals</em> that tell your story
+              in a meaningful way.
+            </p>
+
+            <p>
+              I shoot with an <strong>Olympus OM-D E-M10 Mark IV</strong> paired with carefully selected lenses, and every image is
+              professionally edited using <strong>Adobe Lightroom</strong> to ensure consistent <strong>color</strong>,
+              <strong>clarity</strong>, and <strong>quality</strong>. I also offer
+              <strong>same-day instant photo prints</strong>, allowing clients to leave their session with a physical memory
+              the very same day.
+            </p>
+
+            <p>
+              I provide <strong>mini sessions</strong> and <strong>custom shoots</strong> with flexible locations tailored to your needs.
+              For clients who can assist with <strong>transportation</strong> to their preferred location, a
+              <strong>20% discount</strong> is available—helping keep professional photography accessible while maintaining
+              high-quality results.
+            </p>
+
+            <p><strong>let’s veereal.</strong></p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section id="services" aria-label="Services">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Services</h2>
+          <p class="section-sub">Simple options for portraits, families, and content.</p>
+        </div>
+        <div class="section-actions">
+          <button class="btn primary small" onclick="textToBook()">Book a session</button>
+        </div>
+      </div>
+
+      <div class="services-grid">
+        <div class="service">
+          <h3>Portraits</h3>
+          <p>Natural, relaxed individual sessions with clean edits.</p>
+        </div>
+        <div class="service">
+          <h3>Family & Couples</h3>
+          <p>Authentic connection, beautifully captured in natural light.</p>
+        </div>
+        <div class="service">
+          <h3>Creative / Brand</h3>
+          <p>Modern visuals for creators and small businesses.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proof" aria-label="Gallery">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Latest Gallery</h2>
+          <p class="section-sub">Tap any photo to view it bigger.</p>
+        </div>
+        <div class="section-actions">
+          <button class="btn ghost small" onclick="scrollGallery(-1)">◀</button>
+          <button class="btn ghost small" onclick="scrollGallery(1)">▶</button>
+        </div>
+      </div>
+
+      <div class="gallery" id="gallery">
+        <figure><img src="assets/img/proof-01.jpg" alt="Gallery photo 1" loading="lazy" onclick="openLightbox(this)"></figure>
+        <figure><img src="assets/img/proof-02.jpg" alt="Gallery photo 2" loading="lazy" onclick="openLightbox(this)"></figure>
+        <figure><img src="assets/img/proof-03.jpg" alt="Gallery photo 3" loading="lazy" onclick="openLightbox(this)"></figure>
+        <figure><img src="assets/img/proof-04.jpg" alt="Gallery photo 4" loading="lazy" onclick="openLightbox(this)"></figure>
+        <figure><img src="assets/img/proof-05.jpg" alt="Gallery photo 5" loading="lazy" onclick="openLightbox(this)"></figure>
+        <figure><img src="assets/img/proof-06.jpg" alt="Gallery photo 6" loading="lazy" onclick="openLightbox(this)"></figure>
+        <figure><img src="assets/img/proof-07.jpg" alt="Gallery photo 7" loading="lazy" onclick="openLightbox(this)"></figure>
+        <figure><img src="assets/img/proof-08.jpg" alt="Gallery photo 8" loading="lazy" onclick="openLightbox(this)"></figure>
+        <figure><img src="assets/img/proof-09.jpg" alt="Gallery photo 9" loading="lazy" onclick="openLightbox(this)"></figure>
+        <figure><img src="assets/img/proof-10.jpg" alt="Gallery photo 10" loading="lazy" onclick="openLightbox(this)"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" aria-label="Contact">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Contact</h2>
+          <p class="section-sub">Text to book, ask questions, or check availability.</p>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="contact-grid">
+          <div>
+            <h3 style="margin:0 0 6px; font-size:16px; letter-spacing:.2px;">Fast booking by text</h3>
+            <p style="margin:0; color:var(--muted);">
+              Tell me what you’re looking for (portraits, family, brand), your ideal date/time, and your preferred location.
+            </p>
+
+            <div class="hero-actions" style="margin-top:14px">
+              <button class="btn primary" onclick="textToBook()">Text 302-260-1994</button>
+              <button class="btn ghost" onclick="copyNumber()">Copy number</button>
+            </div>
+
+            <p class="note">Tip: If you’re on desktop, clicking “Text” may not open Messages. Copy the number instead.</p>
+          </div>
+
+          <div class="kv" aria-label="Details">
+            <div><span>Location</span><strong>Dover, DE</strong></div>
+            <div><span>Hours</span><strong>Mon–Fri · 9–5</strong></div>
+            <div><span>Session</span><strong>$50 · 1 hour</strong></div>
+            <div><span>Delivery</span><strong>10–20 edited</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer>
-  <div class="brand">letsveereal</div>
+  <div class="container">
+    <div class="brandline">
+      <span class="logo">letsveereal</span>
+      <span style="color:var(--muted)">•</span>
+      <span>Natural moments, captured honestly.</span>
+    </div>
+    <small>© <span id="year"></span> letsveereal photography · Dover, DE</small>
+  </div>
 </footer>
 
-<div class="textus" onclick="textToBook()">Text to book</div>
+<button class="fab" onclick="textToBook()">Text to book</button>
+
+<!-- Lightbox Modal -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Image preview" onclick="closeLightbox(event)">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="modal-top">
+      <div class="muted">Tap outside the image or press Esc to close</div>
+      <button class="x" onclick="closeLightbox()">Close</button>
+    </div>
+    <img id="modalImg" src="" alt="Preview">
+  </div>
+</div>
 
 <script>
-const music = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("musicBtn");
-let isPlaying = false;
+const PHONE = "3022601994";
+const PHONE_PRETTY = "302-260-1994";
 
 function textToBook(){
-  window.location.href = "sms:3022601994";
+  window.location.href = "sms:" + PHONE;
 }
-function scrollToProof(){
-  document.getElementById("proof").scrollIntoView({behavior:"smooth"});
+
+function scrollToId(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
 }
-function toggleMusic(){
-  if(!isPlaying){
-    music.volume = 0.3;
-    music.play();
-    musicBtn.textContent = "⏸ Pause music";
-  } else {
-    music.pause();
-    musicBtn.textContent = "▶ Play music";
+
+function copyNumber(){
+  navigator.clipboard?.writeText(PHONE_PRETTY).then(()=>{
+    toast("Copied: " + PHONE_PRETTY);
+  }).catch(()=>{
+    const ta = document.createElement("textarea");
+    ta.value = PHONE_PRETTY;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+    toast("Copied: " + PHONE_PRETTY);
+  });
+}
+
+function scrollGallery(dir){
+  const g = document.getElementById("gallery");
+  if(!g) return;
+  const amt = Math.min(600, g.clientWidth * 0.9);
+  g.scrollBy({left: dir * amt, behavior:"smooth"});
+}
+
+/* Lightbox */
+function openLightbox(img){
+  const modal = document.getElementById("modal");
+  const modalImg = document.getElementById("modalImg");
+  modalImg.src = img.src;
+  modalImg.alt = img.alt || "Preview";
+  modal.classList.add("open");
+}
+function closeLightbox(e){
+  const modal = document.getElementById("modal");
+  if(!modal.classList.contains("open")) return;
+  modal.classList.remove("open");
+  document.getElementById("modalImg").src = "";
+}
+
+/* Esc closes modal */
+document.addEventListener("keydown", (e)=>{
+  if(e.key === "Escape") closeLightbox();
+});
+
+/* Tiny toast (minimal, not bubbly) */
+let toastTimer;
+function toast(msg){
+  clearTimeout(toastTimer);
+  let t = document.getElementById("toast");
+  if(!t){
+    t = document.createElement("div");
+    t.id = "toast";
+    t.style.position = "fixed";
+    t.style.left = "18px";
+    t.style.bottom = "18px";
+    t.style.padding = "10px 12px";
+    t.style.borderRadius = "12px";
+    t.style.border = "1px solid rgba(255,255,255,.14)";
+    t.style.background = "rgba(10,10,10,.88)";
+    t.style.color = "rgba(255,255,255,.90)";
+    t.style.boxShadow = "0 18px 60px rgba(0,0,0,.55)";
+    t.style.fontWeight = "800";
+    t.style.fontSize = "14px";
+    t.style.zIndex = "2000";
+    t.style.maxWidth = "86vw";
+    document.body.appendChild(t);
   }
-  isPlaying = !isPlaying;
+  t.textContent = msg;
+  t.style.opacity = "1";
+  toastTimer = setTimeout(()=>{ t.style.opacity = "0"; }, 1400);
 }
+
+document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
 </body>
